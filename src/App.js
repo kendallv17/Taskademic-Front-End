@@ -1,9 +1,9 @@
 
 function App() {
   return (
-    <div className="App">
-      Hello taskademic students
-    </div>
+    <h1 className="text-center bg-green-600">
+      Hello world!
+    </h1>
   );
 }
 
