@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import SidebarItem from "../sidebarItem/sidebarItem"
+import SidebarItem from "../sidebarItem/SidebarItem"
 export default function Sidebar(){
     const [hidden, setHidden] = useState(false)
     return (
