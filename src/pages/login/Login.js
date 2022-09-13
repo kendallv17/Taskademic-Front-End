@@ -26,7 +26,7 @@ export default function Login(){
                                         <label  htmlFor="remember" className="text-mercury-600 text-base">Remember me</label>
                                     </div>
                                 </div>
-                                <a href="#" className="text-sm font-medium hover:underline text-radical-red-500">Forgot password?</a>
+                                <a href="/password-forgotten" className="text-sm font-medium hover:underline text-radical-red-500">Forgot password?</a>
                             </div>
                             <button type="submit" className="w-full text-mercury-50 bg-radical-red-500 hover:bg-radical-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                             <a type="button" href="/" className="w-full text-mercury-50 bg-bright-turquoise-700 hover:bg-bright-turquoise-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Cancel</a>
