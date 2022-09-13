@@ -6,8 +6,8 @@ export default function Sidebar({hidden}){
         <div className="overflow-y-auto min-h-full py-4 px-3 bg-blue-dark relative">
             <ul className="space-y-2">
                 <li className="border-b border-mercury-600">
-                    <a href="/" className="flex items-center py-4 text-base text-center font-normal text-mercury-600">
-                        <span className="self-center text-xl flex-auto font-semibold dark:text-white hover:text-radical-red-500">Taskademic Board</span>
+                    <a href="/" className="flex items-center py-4 text-base text-center font-normal text-mercury-600 hover:text-radical-red-500">
+                        <span className="self-center text-xl flex-auto font-semibold dark:text-white">Taskademic Board</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                         </svg>
