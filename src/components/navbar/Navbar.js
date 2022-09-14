@@ -1,8 +1,6 @@
-import Clock from "../clock/Clock";
-
 export default function Navbar({hidden, setHidden}){
     return (
-    <nav className="bg-blue-dark pl-1 sm:px-4 py-2.5 fixed w-full z-20 border-mercury-600 border-l pt-5 flex">
+    <nav className="bg-blue-dark pl-1 sm:px-4 py-2.5 w-full z-20 border-mercury-600 border-l pt-5 flex">
         <div className="container flex-1 justify-start items-center">
             <div className="flex-1">
                 <div className="flex text-lg">
@@ -16,11 +14,6 @@ export default function Navbar({hidden, setHidden}){
                         </svg>
                     }
                 </div>
-            </div>
-        </div>
-        <div className="flex-auto relative text-mercury-600 text-xl justify-center content-center">
-            <div className="right-0">
-                    <Clock/>
             </div>
         </div>
     </nav>
