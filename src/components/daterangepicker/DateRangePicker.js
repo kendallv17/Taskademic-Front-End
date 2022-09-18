@@ -6,9 +6,7 @@ export default function BasicDateRangePicker({required}) {
   return (
     <DateRangePicker onChange={onChange} value={value} 
       rangeDivider="to "
-      className="shadow-sm bg-blue-dark border text-mercury-600 text-base rounded-lg p-2.5 text-center content-center md:w-64"
-      clearIcon={true}
-      calendarIcon={false}
+      className="shadow-sm bg-blue-dark border text-mercury-600 hover:text-mercury-800 text-base rounded-lg p-2.5 text-center content-center md:w-96"
       required={required}
     />
   );
