@@ -3,7 +3,7 @@ import SidebarItem from "../sidebarItem/SidebarItem"
 export default function Sidebar({hidden}){
     return (
         !hidden ? <aside className="w-64 flex-none" aria-label="Sidebar">
-        <div className="overflow-y-auto min-h-full py-4 px-3 bg-blue-dark relative">
+        <div className="overflow-y-auto h-full py-4 px-3 bg-blue-dark relative">
             <ul className="space-y-2">
                 <li className="border-b border-mercury-600">
                     <a href="/" className="flex items-center py-4 text-base text-center font-normal text-mercury-600 hover:text-radical-red-500">
