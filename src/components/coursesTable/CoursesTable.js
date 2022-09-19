@@ -1,4 +1,3 @@
-import { useState } from "react"
 import AddNewCourse from "./AddNewCourse"
 import TableRow from "./TableRow"
 export default function CoursesTable({courses, setCourses}){
