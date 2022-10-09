@@ -10,7 +10,7 @@ export default function Login(){
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <img src={welcome} alt="Welcome"/>
                         <h2 className="text-xl font-bold leading-tight tracking-tight md:text-xl text-radical-red-500"> Your first task is to sign in to your account </h2>
-                        <form className="space-y-4 md:space-y-6" action="/login" method="POST">
+                        <form className="space-y-4 md:space-y-6" onSubmit={ () => alert("Do a login request!!") } method="POST" >
                             <div>
                                 <Input type="email" identifier="email" tittle="Email address" required={ true }/>
                             </div>

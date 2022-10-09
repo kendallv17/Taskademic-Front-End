@@ -8,6 +8,7 @@ function App() {
       <Sidebar hidden={ hidden }></Sidebar>
       <div className="h-full flex-auto">
         <Navbar hidden={ hidden } setHidden={ setHidden }></Navbar>
+        Hello world
       </div>
     </div>
   );
