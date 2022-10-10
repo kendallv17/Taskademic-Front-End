@@ -1,7 +1,21 @@
 import React from "react";
 import Input from "../../components/input/Input";
 import welcome from "../../images/welcome.jpg"
+import axios from "axios";
 export default function Login(){
+
+    const makeRequest = async (_event) => {
+        try {
+            _event.preventDefault()
+            let response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+            const responseObject = response.data
+            alert(responseObject)
+        }
+        catch(error){
+            alert(error)
+        }
+    }
+
     return (
         <section className="">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -10,7 +24,7 @@ export default function Login(){
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <img src={welcome} alt="Welcome"/>
                         <h2 className="text-xl font-bold leading-tight tracking-tight md:text-xl text-radical-red-500"> Your first task is to sign in to your account </h2>
-                        <form className="space-y-4 md:space-y-6" onSubmit={ () => alert("Do a login request!!") } method="POST" >
+                        <form className="space-y-4 md:space-y-6" onSubmit={ makeRequest }>
                             <div>
                                 <Input type="email" identifier="email" tittle="Email address" required={ true }/>
                             </div>
