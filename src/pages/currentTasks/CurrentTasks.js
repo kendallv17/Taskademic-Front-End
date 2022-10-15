@@ -4,7 +4,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useEffect, useState } from "react";
 export default function CurrentTasks(){
     const [hidden, setHidden] = useState(true)
-    let data = {
+    const [data,setData] = useState({
         "todoData": {
             columnId: "todoData", 
             tasks:[
@@ -31,7 +31,7 @@ export default function CurrentTasks(){
                 {id:"6", tittle:"Task 06", description:"Do a flip 6"}
             ]
         }
-    }
+    })
     function getWindowSize() {
         const {innerWidth, innerHeight} = window;
         return {innerWidth, innerHeight};
@@ -56,7 +56,7 @@ export default function CurrentTasks(){
             <Navbar hidden={ hidden } setHidden={ setHidden }/>
             {windowSize.innerWidth < 768 && !hidden ?    
                 <></>:
-                <Board data={data} className="p-6 space-y-4 md:space-y-6 sm:p-8 border-2 px-4"></Board>
+                <Board data={data} setData={ setData } className="p-6 space-y-4 md:space-y-6 sm:p-8 border-2 px-4"></Board>
             }
         </div>
     </div>

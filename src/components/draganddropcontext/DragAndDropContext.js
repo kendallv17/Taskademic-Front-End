@@ -1,21 +1,45 @@
+import { useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import DroppableColumn from '../droppableColumn/DroppableColumn';
-export default function DragAndDropContext({columData}){
+export default function DragAndDropContext({columData, setData}){
     const onDragEnd = result => {
         const { source, destination, draggableId } = result;
         if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) return
         else {
-            const column = columData[source.droppableId]
-            let newTasks = Array.from(column.tasks)
-            newTasks.splice(source.index, 1)
-            newTasks.splice(destination.index, 0, draggableId)
-            
-            const newColumn = {
-                ...column,
-                tasks: newTasks
+            const sourceCol = columData[source.droppableId]
+            const destinationCol = columData[destination.droppableId]
+            let newSourceTasks = Array.from(sourceCol.tasks)
+            if (sourceCol === destinationCol){
+                const selectedItem = sourceCol.tasks.find( ({ id }) => id === draggableId)
+                newSourceTasks.splice(source.index, 1)
+                newSourceTasks.splice(destination.index, 0, selectedItem)
+
+                setData({
+                    ...columData,
+                    [source.droppableId]: {
+                        ...sourceCol,
+                        'tasks': newSourceTasks
+                    }
+                })
+            } else {
+                let newDestinationTasks = Array.from(destinationCol.tasks)
+                const selectedItem = sourceCol.tasks.find( ({ id }) => id === draggableId)
+                newSourceTasks.splice(source.index, 1)
+                newDestinationTasks.splice(destination.index, 0, selectedItem)
+
+                setData({
+                    ...columData,
+                    [source.droppableId]: {
+                        ...sourceCol,
+                        'tasks': newSourceTasks
+                    },
+                    [destination.droppableId]: {
+                        ...destinationCol,
+                        'tasks':newDestinationTasks
+
+                    }
+                })
             }
-            
-            //console.table(newTasksColumn)
         }
     } 
 

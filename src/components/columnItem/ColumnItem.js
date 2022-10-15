@@ -1,7 +1,7 @@
 import { Draggable } from "react-beautiful-dnd"
 export default function ColumnItem({id, index, tittle, description}){
     return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable draggableId={id} index={index} key={id}>
         {
             provided => 
                 <div className="block p-6 mx-2 bg-mercury-500 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 my-2" 
