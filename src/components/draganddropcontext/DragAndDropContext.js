@@ -9,7 +9,7 @@ export default function DragAndDropContext({columData, setData}){
             const sourceCol = columData[source.droppableId]
             const destinationCol = columData[destination.droppableId]
             let newSourceTasks = Array.from(sourceCol.tasks)
-            if (sourceCol === destinationCol){
+            if (sourceCol === destinationCol){ //Misma columna
                 const selectedItem = sourceCol.tasks.find( ({ id }) => id === draggableId)
                 newSourceTasks.splice(source.index, 1)
                 newSourceTasks.splice(destination.index, 0, selectedItem)
@@ -21,7 +21,7 @@ export default function DragAndDropContext({columData, setData}){
                         'tasks': newSourceTasks
                     }
                 })
-            } else {
+            } else {//Diferente columna
                 let newDestinationTasks = Array.from(destinationCol.tasks)
                 const selectedItem = sourceCol.tasks.find( ({ id }) => id === draggableId)
                 newSourceTasks.splice(source.index, 1)
@@ -45,7 +45,7 @@ export default function DragAndDropContext({columData, setData}){
 
     return(
     <DragDropContext onDragEnd={ onDragEnd }>
-        <div className="flex justify-center h-auto">
+        <div className="flex justify-center h-auto pt-5">
                 <DroppableColumn data={ columData.todoData.tasks } id={ columData.todoData.columnId } tittle="To Do"/>
                 <DroppableColumn data={ columData.inProgressData.tasks } id={ columData.inProgressData.columnId  } tittle="In Progress"/>
                 <DroppableColumn data={ columData.reviewingData.tasks } id={ columData.reviewingData.columnId  } tittle="Reviewing"/>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AddNewCourse from "./AddNewCourse"
 import TableRow from "./TableRow"
 export default function CoursesTable({courses, setCourses}){
@@ -8,17 +9,18 @@ export default function CoursesTable({courses, setCourses}){
     const handleAddNewCourse = (event) => { 
         event.preventDefault();
         setCourses([...courses, {key:courses.length, name : event.target.elements.course.value, professor:event.target.elements.professor.value}]) 
+        event.target.reset();
     }
     return (
-        <div className="bg-mercury-100 mt-5 rounded-lg">
-            <AddNewCourse handler={handleAddNewCourse}></AddNewCourse>
+        <div className="bg-mercury-100 mt-5 rounded-lg w-full">
+            <AddNewCourse handler={ handleAddNewCourse }></AddNewCourse>
             <table className="w-full text-sm text-left text-gray-500">
                 <thead className="text-xs text-gray-700 uppercase border-b border-blue-dark">
                     <tr>
-                        <th scope="col" className="py-3 px-3">
+                        <th scope="col" className="py-3 px-3 text-center">
                             Course name
                         </th>
-                        <th scope="col" className="py-3 px-3">
+                        <th scope="col" className="py-3 px-3 text-center">
                             Professor
                         </th>
                         <th onClick={ clearCourseArray }>
