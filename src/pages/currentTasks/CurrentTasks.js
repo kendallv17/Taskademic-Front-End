@@ -8,27 +8,27 @@ export default function CurrentTasks(){
         "todoData": {
             columnId: "todoData", 
             tasks:[
-                {id:"1", tittle:"Task 01", description:"Do a flip 1"},
-                {id:"2", tittle:"Task 02", description:"Do a flip 2"}
+                {id:"1", tittle:"Task 01", course:"Informatica y Suciedad"},
+                {id:"2", tittle:"Task 02", course:"Informatica y Suciedad"}
             ]
         },
         "inProgressData":{
             columnId: "inProgressData",
             tasks:[        
-                {id:"3", tittle:"Task 03", description:"Do a flip 3"},
-                {id:"4", tittle:"Task 04", description:"Do a flip 4"}
+                {id:"3", tittle:"Task 03", course:"Robotica"},
+                {id:"4", tittle:"Task 04", course:"PPS"}
             ]
         },
         "reviewingData":{
             columnId:"reviewingData",
             tasks:[
-                {id:"5", tittle:"Task 05", description:"Do a flip 5"}
+                {id:"5", tittle:"Task 05", course:"Gobierno electronico"}
             ]
         },
         "doneData":{
             columnId:"doneData",
             tasks:[
-                {id:"6", tittle:"Task 06", description:"Do a flip 6"}
+                {id:"6", tittle:"Task 06", course:"PPS"}
             ]
         }
     })

@@ -44,7 +44,7 @@ export default function DragAndDropContext({columData, setData}){
 
     return(
     <DragDropContext onDragEnd={ onDragEnd }>
-        <div className="sm:grid md:flex md:justify-center h-auto pt-5">
+        <div className="sm:grid md:flex justify-center pt-5">
                 <DroppableColumn data={ columData.todoData.tasks } id={ columData.todoData.columnId } tittle="To Do"/>
                 <DroppableColumn data={ columData.inProgressData.tasks } id={ columData.inProgressData.columnId  } tittle="In Progress"/>
                 <DroppableColumn data={ columData.reviewingData.tasks } id={ columData.reviewingData.columnId  } tittle="Reviewing"/>
