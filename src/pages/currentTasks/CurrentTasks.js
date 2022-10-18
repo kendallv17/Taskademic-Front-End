@@ -56,7 +56,7 @@ export default function CurrentTasks(){
             <Navbar hidden={ hidden } setHidden={ setHidden }/>
             {windowSize.innerWidth < 768 && !hidden ?    
                 <></>:
-                <Board data={data} setData={ setData } className="p-6 space-y-4 md:space-y-6 sm:p-8 border-2 px-4"></Board>
+                <Board className="space-y-4 md:space-y-6 sm:p-8 border-2 px-4" data={data} setData={ setData }/>
             }
         </div>
     </div>
