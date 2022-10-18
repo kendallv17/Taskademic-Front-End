@@ -17,7 +17,7 @@ export default function CoursesTable({courses, setCourses}){
                 <thead className="text-xs text-gray-700 uppercase border-b border-blue-dark">
                     <tr>
                         <th scope="col" className="py-3 px-3 text-center">
-                            Course name
+                            Course
                         </th>
                         <th scope="col" className="py-3 px-3 text-center">
                             Professor
