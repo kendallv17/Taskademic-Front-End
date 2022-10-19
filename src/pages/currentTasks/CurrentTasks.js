@@ -5,30 +5,38 @@ import { useEffect, useState } from "react";
 export default function CurrentTasks(){
     const [hidden, setHidden] = useState(true)
     const [data,setData] = useState({
-        "todoData": {
-            columnId: "todoData", 
+        "tasks":[
+            {id:"1", tittle:"Task 01", course:"Informatica y Suciedad", state:"todo"},
+            {id:"2", tittle:"Task 02", course:"Informatica y Suciedad", state:"todo"},
+            {id:"3", tittle:"Task 03", course:"Robotica", state:"inProgress"},
+            {id:"4", tittle:"Task 04", course:"PPS", state:"reviewing"},
+            {id:"5", tittle:"Task 05", course:"Gobierno electronico", state:"reviewing"},
+            {id:"6", tittle:"Task 06", course:"PPS", state:"done"}
+        ],
+        "todo": {
+            columnId: "todo",
             tasks:[
-                {id:"1", tittle:"Task 01", course:"Informatica y Suciedad"},
-                {id:"2", tittle:"Task 02", course:"Informatica y Suciedad"}
+                "1",
+                "2"
             ]
         },
-        "inProgressData":{
-            columnId: "inProgressData",
+        "inProgress":{
+            columnId: "inProgress",
             tasks:[        
-                {id:"3", tittle:"Task 03", course:"Robotica"},
-                {id:"4", tittle:"Task 04", course:"PPS"}
+                "3"
             ]
         },
-        "reviewingData":{
-            columnId:"reviewingData",
+        "reviewing":{
+            columnId:"reviewing",
             tasks:[
-                {id:"5", tittle:"Task 05", course:"Gobierno electronico"}
+                "4",
+                "5"
             ]
         },
-        "doneData":{
-            columnId:"doneData",
+        "done":{
+            columnId:"done",
             tasks:[
-                {id:"6", tittle:"Task 06", course:"PPS"}
+                "6"
             ]
         }
     })
