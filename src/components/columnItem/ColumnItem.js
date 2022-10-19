@@ -9,8 +9,8 @@ export default function ColumnItem({id, index, tittle, course}){
                      { ...provided.dragHandleProps } 
                      ref={ provided.innerRef }
                     >
-                        <h6 className="mb-2 sm:text-[6px] md:text-[18px] font-bold tracking-tight text-gray-900 dark:text-white">{tittle}</h6>
-                        <p className="font-normal sm:text-[4px] md:text-[18px]">Course: <strong>{course}</strong></p>
+                        <h6 className="mb-2 sm:text-[14px] md:text-[18px] font-bold tracking-tight text- dark:text-white">{tittle}</h6>
+                        <p className="font-normal sm:text-[12px] md:text-[18-px]">{course}</p>
                 </div>
         }
     </Draggable>

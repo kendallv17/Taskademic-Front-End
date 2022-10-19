@@ -22,7 +22,6 @@ export default function DragAndDropContext({columData, setData}){
                 let newDestinationTasks = Array.from(destinationCol.tasks)
                 newSourceTasks.splice(source.index, 1)
                 newDestinationTasks.splice(destination.index, 0, draggableId)
-
                 setData({
                     ...columData,
                     [source.droppableId]: {

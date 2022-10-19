@@ -20,7 +20,7 @@ export default function Login(){
         <section className="">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <h1 className="flex items-center mb-6 text-3xl font-semibold text-gray-900 dark:text-white">Taskademic board</h1>
-                <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 bg-blue-dark">
+                <div className="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 bg-blue-dark">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <img src={welcome} alt="Welcome"/>
                         <h2 className="text-xl font-bold leading-tight tracking-tight md:text-xl text-radical-red-500"> Your first task is to sign in to your account </h2>

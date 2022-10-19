@@ -4,7 +4,14 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useEffect, useState } from "react";
 export default function CurrentTasks(){
     const [hidden, setHidden] = useState(true)
+
     const [data,setData] = useState({
+        "courses":[
+            {id:"11", name:"Informatica y Suciedad"},
+            {id:"22", name:"Robotica"},
+            {id:"33", name:"PPS"},
+            {id:"44", name:"Gobierno electronico"}
+        ],
         "tasks":[
             {id:"1", tittle:"Task 01", course:"Informatica y Suciedad", state:"todo"},
             {id:"2", tittle:"Task 02", course:"Informatica y Suciedad", state:"todo"},
