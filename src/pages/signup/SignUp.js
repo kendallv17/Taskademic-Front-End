@@ -1,7 +1,36 @@
 import React from "react";
 import success from "../../images/success.jpg"
 import Input from "../../components/input/Input";
-export default function SignUp(){
+export default function SignUp({supabaseClient}){
+
+    const handleSignUpSubmit = async (event) => {
+        try {
+            event.preventDefault()
+            let iqualPasswords = event.target.password.value === event.target.repeat_password.value;
+            if(iqualPasswords){
+                const { data, error } = await supabaseClient.auth.signUp(
+                    {
+                      email: event.target.email.value,
+                      password: event.target.password.value,
+                      options: {
+                        data: {
+                          first_name: event.target.name.value,
+                          lastname: event.target.lastname.value,
+                          college: event.target.college.value
+                        }
+                      }
+                    }
+                )
+                data ? console.log(data) : alert(error)
+            } else {
+                alert("Passwords do not match");
+            }
+            
+        }
+        catch(error){
+            alert(error)
+        }
+    }
     return (
         <div className="sm:flex min-h-screen md:flex bg-blue-dark">
             <div className="self-center flex-1 p-3">
@@ -9,7 +38,7 @@ export default function SignUp(){
             </div>
             <div className="self-center flex-1 p-3">
             <h2 className="text-3xl text-center text-radical-red-500 mb-5">Create a new account</h2>
-                <form method="POST">
+                <form onSubmit={ handleSignUpSubmit }>
                     <div className="flex mb-3">
                         <div className="flex-1 pr-3">
                             <Input type="text" identifier="name" tittle="Name" placeholder="" required={true}/>
@@ -25,7 +54,7 @@ export default function SignUp(){
                         <Input type="password" identifier="password" tittle="Password" placeholder="" required={true}/>
                     </div>
                     <div className="mb-3">
-                        <Input type="password" identifier="repeat-password" tittle="Repeat the password" placeholder="" required={true}/>
+                        <Input type="password" identifier="repeat_password" tittle="Repeat the password" placeholder="" required={true}/>
                     </div>
                     <div className="mb-3">
                         <Input type="text" identifier="college" tittle="Your college name" placeholder="" required={true}/>

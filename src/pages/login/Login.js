@@ -1,15 +1,24 @@
 import React from "react";
 import Input from "../../components/input/Input";
 import welcome from "../../images/welcome.jpg"
-import axios from "axios";
-export default function Login(){
+export default function Login({supabaseClient}){
 
-    const makeRequest = async (_event) => {
+    const handleLoginSubmint = async (event) => {
         try {
-            _event.preventDefault()
-            let response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-            const responseObject = response.data
-            alert(responseObject)
+            event.preventDefault()
+            const { data, error } = await supabaseClient.auth.signUp(
+                {
+                  email: event.target.email.value,
+                  password: 'example-password',
+                  options: {
+                    data: {
+                      first_name: 'John',
+                      age: 27,
+                    }
+                  }
+                }
+            )
+            data ? alert(data) : alert(error)
         }
         catch(error){
             alert(error)
@@ -24,7 +33,7 @@ export default function Login(){
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <img src={welcome} alt="Welcome"/>
                         <h2 className="text-xl font-bold leading-tight tracking-tight md:text-xl text-radical-red-500"> Your first task is to sign in to your account </h2>
-                        <form className="space-y-4 md:space-y-6" onSubmit={ makeRequest }>
+                        <form className="space-y-4 md:space-y-6" onSubmit={ handleLoginSubmint }>
                             <div>
                                 <Input type="email" identifier="email" tittle="Email address" required={ true }/>
                             </div>
