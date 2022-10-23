@@ -7,16 +7,21 @@ import Login from './pages/login/Login';
 import NewPeriod from './pages/newPeriod/newPeriod';
 import CurrentTasks from './pages/currentTasks/CurrentTasks';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+import Landing from './pages/landing/Landing';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={ <App className="bg-mercury-600"/>} />
+      <Route element={<ProtectedRoute user={null}/>}>
+        <Route path="/" element={ <App className="bg-mercury-600"/>} />
+        <Route path="/add-new-period" element={ <NewPeriod className="bg-mercury-900"/> } />
+        <Route path="/current-tasks" element={ <CurrentTasks className="bg-mercury-900"/> } />
+      </Route>
       <Route path="/signup" element={ <SignUp/> } />
       <Route path="/login" element={ <Login className="bg-mercury-900"/> } />
-      <Route path="/add-new-period" element={ <NewPeriod className="bg-mercury-900"/> } />
-      <Route path="/current-tasks" element={ <CurrentTasks className="bg-mercury-900"/> } />
+      <Route path="/landing" element={ <Landing/>}/>
     </Routes>
   </BrowserRouter>
 );
