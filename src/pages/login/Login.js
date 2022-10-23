@@ -14,7 +14,7 @@ export default function Login({supabaseClient}){
                   password: event.target.password.value,
                 }
             )
-            if(error) throw new Error("An error ocurred while creating your account, please retry again")
+            if(error) throw new Error(`An error ocurred while login in ${error}, please retry again`)
             writeSession(data)
             navigate("/", { replace: true })
         }

@@ -13,7 +13,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Globals } from './Globals';
 
 const SUPABASECLIENT = createClient(Globals.REACT_APP_SUPABASE_URL, Globals.REACT_APP_SUPABASE_KEY)
-
+console.log("Client created")
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

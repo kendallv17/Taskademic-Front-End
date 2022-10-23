@@ -23,7 +23,7 @@ export default function SignUp({supabaseClient}){
                       }
                     }
                 )
-                if(error) throw new Error("An error ocurred while creating your account, please retry again")
+                if(error) throw new Error(`An error ocurred while creating your account, ${error}, please retry again`)
                 writeSession(data)
                 navigate("/", { replace: true })
             } else {
