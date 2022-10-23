@@ -1,24 +1,22 @@
 import React from "react";
 import Input from "../../components/input/Input";
 import welcome from "../../images/welcome.jpg"
+import { writeSession } from "../../utils/SessionManager";
+import { useNavigate } from "react-router-dom";
 export default function Login({supabaseClient}){
-
+    const navigate = useNavigate()
     const handleLoginSubmint = async (event) => {
         try {
             event.preventDefault()
-            const { data, error } = await supabaseClient.auth.signUp(
+            const { data, error } = await supabaseClient.auth.signInWithPassword(
                 {
                   email: event.target.email.value,
-                  password: 'example-password',
-                  options: {
-                    data: {
-                      first_name: 'John',
-                      age: 27,
-                    }
-                  }
+                  password: event.target.password.value,
                 }
             )
-            data ? alert(data) : alert(error)
+            if(error) throw new Error("An error ocurred while creating your account, please retry again")
+            writeSession(data)
+            navigate("/", { replace: true })
         }
         catch(error){
             alert(error)

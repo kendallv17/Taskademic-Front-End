@@ -1,8 +1,10 @@
 import React from "react";
 import success from "../../images/success.jpg"
 import Input from "../../components/input/Input";
+import { writeSession } from '../../utils/SessionManager';
+import { useNavigate } from "react-router-dom";
 export default function SignUp({supabaseClient}){
-
+    const navigate = useNavigate();
     const handleSignUpSubmit = async (event) => {
         try {
             event.preventDefault()
@@ -21,9 +23,11 @@ export default function SignUp({supabaseClient}){
                       }
                     }
                 )
-                data ? console.log(data) : alert(error)
+                if(error) throw new Error("An error ocurred while creating your account, please retry again")
+                writeSession(data)
+                navigate("/", { replace: true })
             } else {
-                alert("Passwords do not match");
+                throw new Error("Passwords do not match");
             }
             
         }
