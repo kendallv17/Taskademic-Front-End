@@ -10,7 +10,6 @@ export async function createCourses(SupabaseClient, coursesData){
     let requests = coursesData.map(course => SupabaseClient
         .from('Period_Courses')
         .insert(course))
-    console.log(requests)
     let resultArray = Promise.all(requests).catch(error => { throw new Error(`An error ocurred while creating the college period, ${error}. Please try again`)});
     return resultArray
 }

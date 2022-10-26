@@ -33,15 +33,13 @@ export default function NewPeriod( { SupabaseClient } ){
             if (courses.length < 1) throw new Error("No courses were added to the period, please add some");
             let periodDetails = {
                 period_description: event.target.period_desc.value,
-                start_date: datesValues[0],
-                end_date: datesValues[1],
+                start_date: datesValues[0].toISOString().slice(0, 10),
+                end_date: datesValues[1].toISOString().slice(0, 10),
                 owner: readSession().user.id
             };
             let newPeriodId = await createPeriod( SupabaseClient,periodDetails);
-
             let coursesData = courses.map( ({name, professor}) => ({Course_Name:name , Course_Professor:professor, Period_id:newPeriodId[0].id }) )
-            console.log(coursesData)
-            let result = await createCourses( SupabaseClient, coursesData );
+            await createCourses( SupabaseClient, coursesData );
             alert('Your semester was registered successfully')
         } catch(error) {
             alert(error)
