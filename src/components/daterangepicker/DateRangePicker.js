@@ -1,8 +1,5 @@
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
-import React, {useState} from 'react'
-export default function BasicDateRangePicker({required}) {
-  const [value, onChange] = useState([new Date(), new Date()]);
-
+export default function BasicDateRangePicker({required, value, onChange}) {
   return (
     <DateRangePicker onChange={onChange} value={value} 
       rangeDivider="to "

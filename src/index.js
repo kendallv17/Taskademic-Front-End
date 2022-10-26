@@ -13,14 +13,13 @@ import { createClient } from "@supabase/supabase-js";
 import { Globals } from './Globals';
 
 const SUPABASECLIENT = createClient(Globals.REACT_APP_SUPABASE_URL, Globals.REACT_APP_SUPABASE_KEY)
-console.log("Client created")
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
       <Route element={<ProtectedRoute/>}>
         <Route path="/" element={ <App className="bg-mercury-600"/>} />
-        <Route path="/add-new-period" element={ <NewPeriod className="bg-mercury-900"/> } />
+        <Route path="/add-new-period" element={ <NewPeriod className="bg-mercury-900" SupabaseClient={ SUPABASECLIENT }/> } />
         <Route path="/current-tasks" element={ <CurrentTasks className="bg-mercury-900"/> } />
       </Route>
       <Route path="/signup" element={ <SignUp supabaseClient={ SUPABASECLIENT }/> } />

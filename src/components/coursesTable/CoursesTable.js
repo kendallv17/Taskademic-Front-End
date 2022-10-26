@@ -7,7 +7,7 @@ export default function CoursesTable({courses, setCourses}){
     const clearCourseArray = () => setCourses([]);
     const handleAddNewCourse = (event) => { 
         event.preventDefault();
-        setCourses([...courses, {key:courses.length, name : event.target.elements.course.value, professor:event.target.elements.professor.value}]) 
+        setCourses([...courses, {key: courses.length, name : event.target.elements.course.value, professor:event.target.elements.professor.value}]) 
         event.target.reset();
     }
     return (
