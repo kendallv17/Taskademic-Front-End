@@ -5,22 +5,17 @@ import CoursesTable from "../../components/coursesTable/CoursesTable"
 import { createPeriod, createCourses } from "../../services/PeriodService"
 import { readSession } from "../../utils/SessionManager"
 import { useState, useEffect } from "react"
+import GetWindowSize from "../../utils/GetWindowSize"
 export default function NewPeriod( { SupabaseClient } ){
     const [hidden, setHidden] = useState(true)
+    const [windowSize, setWindowSize] = useState(GetWindowSize());
     const [courses, setCourses] = useState([])
     const [datesValues, setDatesValues] = useState([new Date(), new Date()]);
 
-    function getWindowSize() {
-        const {innerWidth, innerHeight} = window;
-        return {innerWidth, innerHeight};
-    }
-    const [windowSize, setWindowSize] = useState(getWindowSize());
-
     useEffect(() => {
       function handleWindowResize() {
-        setWindowSize(getWindowSize());
+        setWindowSize(GetWindowSize());
       }
-  
       window.addEventListener('resize', handleWindowResize);
   
       return () => {
