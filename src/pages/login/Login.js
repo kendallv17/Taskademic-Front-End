@@ -1,7 +1,6 @@
 import React from "react";
 import Input from "../../components/input/Input";
 import welcome from "../../images/welcome.jpg"
-import { writeSession } from "../../utils/SessionManager";
 import { useNavigate } from "react-router-dom";
 export default function Login({supabaseClient}){
     const navigate = useNavigate()
@@ -15,7 +14,6 @@ export default function Login({supabaseClient}){
                 }
             )
             if(error) throw new Error(`An error ocurred while login in ${error}, please retry again`)
-            writeSession(data)
             navigate("/", { replace: true })
         }
         catch(error){

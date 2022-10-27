@@ -53,7 +53,7 @@ export default function NewPeriod( { SupabaseClient } ){
                 {windowSize.innerWidth < 768 && !hidden ?    
                     <></>:
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8 border-2 px-4">
-                        <div className="bg-blue-dark px-3">
+                        <div className="bg-blue-dark px-3 rounded-lg">
                             <h2 className="text-2xl font-bold leading-tight tracking-tight md:text-xl text-radical-red-500 py-5"> Please fill all the necesary information</h2>
                             <CoursesTable courses={ courses } setCourses={setCourses}/>
                             <form className="pt-2" onSubmit={ handleNewPeriodSubmit }>

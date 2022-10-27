@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route element={<ProtectedRoute/>}>
+      <Route element={<ProtectedRoute user={ SUPABASECLIENT.auth.getUser() }/>}>
         <Route path="/" element={ <App className="bg-mercury-600"/>} />
         <Route path="/add-new-period" element={ <NewPeriod className="bg-mercury-900" SupabaseClient={ SUPABASECLIENT }/> } />
         <Route path="/current-tasks" element={ <CurrentTasks className="bg-mercury-900"/> } />

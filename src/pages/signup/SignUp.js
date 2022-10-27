@@ -1,7 +1,6 @@
 import React from "react";
 import success from "../../images/success.jpg"
 import Input from "../../components/input/Input";
-import { writeSession } from '../../utils/SessionManager';
 import { useNavigate } from "react-router-dom";
 export default function SignUp({supabaseClient}){
     const navigate = useNavigate();
@@ -24,7 +23,6 @@ export default function SignUp({supabaseClient}){
                     }
                 )
                 if(error) throw new Error(`An error ocurred while creating your account, ${error}, please retry again`)
-                writeSession(data)
                 navigate("/", { replace: true })
             } else {
                 throw new Error("Passwords do not match");

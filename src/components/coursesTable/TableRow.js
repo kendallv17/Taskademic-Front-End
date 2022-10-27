@@ -1,10 +1,10 @@
 export default function TableRow({name, professor, action}){
     return (
-        <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-            <th scope="row" className="py-4 px-3 font-medium text-gray-900">
+        <tr className="bg-white border-b dark:bg-gray-900">
+            <td className="py-4 px-3 font-medium text-gray-900 text-center">
                 {name}
-            </th>
-            <td className="py-4 px-3">
+            </td>
+            <td className="py-4 px-3 font-medium text-gray-900 text-center">
                 {professor}
             </td>
             <td>

@@ -11,19 +11,19 @@ export default function CoursesTable({courses, setCourses}){
         event.target.reset();
     }
     return (
-        <div className="bg-mercury-100 mt-5 rounded-lg w-full">
+        <div className="bg-mercury-100 mt-5 rounded-lg overflow-x-auto relative">
             <AddNewCourse handler={ handleAddNewCourse }></AddNewCourse>
-            <table className="w-full text-sm text-left text-gray-500">
-                <thead className="text-xs text-gray-700 uppercase border-b border-blue-dark">
+            <table className="w-full text-xs text-gray-500 mt-2 uppercase">
+                <thead className="text-gray-700 uppercase border-b border-blue-dark">
                     <tr>
-                        <th scope="col" className="py-3 px-3 text-center">
+                        <th scope="col" className="py-3 px-3 w-1/2">
                             Course
                         </th>
-                        <th scope="col" className="py-3 px-3 text-center">
+                        <th scope="col" className="py-3 px-3 w-1/2">
                             Professor
                         </th>
-                        <th onClick={ clearCourseArray }>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                        <th onClick={ clearCourseArray } className="py-3 px-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 right-">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </th>
