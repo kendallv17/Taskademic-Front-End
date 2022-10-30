@@ -2,9 +2,13 @@ import { useState, useEffect } from "react";
 import GetWindowSize from "../../utils/GetWindowSize";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
+import { readSession, clearSession } from "../../utils/SessionManager";
+import { useNavigate } from "react-router-dom";
 export default function Profile(){
+    const navigate = useNavigate();
     const [hidden, setHidden] = useState(true)
     const [windowSize, setWindowSize] = useState(GetWindowSize());
+    const sessionData = readSession();
     useEffect(() => {
         function handleWindowResize() {
           setWindowSize(GetWindowSize());
@@ -15,6 +19,11 @@ export default function Profile(){
           window.removeEventListener('resize', handleWindowResize);
         };
       }, []);
+    const handleSignOut = () => {
+        clearSession();
+        navigate("/login", { replace: true });
+        
+    }
     return (
         <div className="flex h-fit">
             <Sidebar hidden={ hidden }></Sidebar>
@@ -23,18 +32,21 @@ export default function Profile(){
                 {windowSize.innerWidth < 768 && !hidden ?    
                     <></>:
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8 border-2 px-4">
-                            <div id="profile" className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0">
+                            <div id="profile" className="w-full rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 lg:mx-0">
                                 <div className="p-4 md:p-12 text-center lg:text-left">
                                     <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"></div>
                                     
-                                    <h1 className="text-3xl font-bold pt-8 lg:pt-0">Your Name</h1>
+                                    <h1 className="text-3xl font-bold pt-8 lg:pt-0">{ sessionData.user.user_metadata.first_name } { sessionData.user.user_metadata.lastname }</h1>
                                     <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
-                                    <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start"><svg className="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z"/></svg> What you do</p>
-                                    <p className="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start"><svg className="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm7.75-8a8.01 8.01 0 0 0 0-4h-3.82a28.81 28.81 0 0 1 0 4h3.82zm-.82 2h-3.22a14.44 14.44 0 0 1-.95 3.51A8.03 8.03 0 0 0 16.93 14zm-8.85-2h3.84a24.61 24.61 0 0 0 0-4H8.08a24.61 24.61 0 0 0 0 4zm.25 2c.41 2.4 1.13 4 1.67 4s1.26-1.6 1.67-4H8.33zm-6.08-2h3.82a28.81 28.81 0 0 1 0-4H2.25a8.01 8.01 0 0 0 0 4zm.82 2a8.03 8.03 0 0 0 4.17 3.51c-.42-.96-.74-2.16-.95-3.51H3.07zm13.86-8a8.03 8.03 0 0 0-4.17-3.51c.42.96.74 2.16.95 3.51h3.22zm-8.6 0h3.34c-.41-2.4-1.13-4-1.67-4S8.74 3.6 8.33 6zM3.07 6h3.22c.2-1.35.53-2.55.95-3.51A8.03 8.03 0 0 0 3.07 6z"/></svg> Your Location - 25.0000° N, 71.0000° W</p>
-                                    <p className="pt-8 text-sm">Totally optional short description about yourself, what you do and so on.</p>
+                                        <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25" /></svg>{ sessionData.user.email }</p>
+                                        <p className="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33" /></svg>{sessionData.user.id}</p>
+                                        <p className="pt-8 text-sm">Currently enroll at <strong>{ sessionData.user.user_metadata.college }</strong></p>
 
                                     <div className="pt-12 pb-8">
-                                        <button className="bg-radical-red-700 hover:bg-radical-red-400 text-white font-bold py-2 px-4 rounded-full">
+                                        <button className="bg-radical-red-700 hover:bg-radical-red-400 text-white font-bold py-2 px-4 rounded-full" onClick={ handleSignOut }>
                                             Sign Out
                                         </button> 
                                     </div>

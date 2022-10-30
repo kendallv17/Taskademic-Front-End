@@ -18,8 +18,8 @@ export default function Landing(){
 				<img className="w-full md:w-4/5 z-50 rounded-lg" alt="Board managing"src={landing}/>
 			</div>
 		</div>
-        <div className="px-3 flex flex-wrap flex-col md:ml-auto md:flex-row items-center rounded-lg">
-            <div className="flex-1 flex-col w-full md:w-2/5 justify-center items-center text-center md:text-left md:pl-80">
+        <div className="container px-3 flex flex-wrap flex-col md:ml-auto md:flex-row items-center rounded-lg">
+            <div className="flex-1 flex-col w-full md:w-2/5 justify-center items-center text-center md:text-left">
                 <h3 className="w-full my-2 text-5xl font-bold leading-tight text-center">What is taskademic?</h3>
                 <h5 className="leading-normal text-2xl mb-8">Taskademic is a web based application that
                     allow you to manage your academic tasks. It is aimed for students of all ages that are having a bad time keeping up with their assignments

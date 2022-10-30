@@ -12,7 +12,7 @@ import Landing from './pages/landing/Landing';
 import Profile from './pages/profile/Profile';
 import { createClient } from "@supabase/supabase-js";
 import { Globals } from './Globals';
-
+import About from './pages/about/About';
 const SUPABASECLIENT = createClient(Globals.REACT_APP_SUPABASE_URL, Globals.REACT_APP_SUPABASE_KEY)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +23,7 @@ root.render(
         <Route path="/add-new-period" element={ <NewPeriod className="bg-mercury-900" SupabaseClient={ SUPABASECLIENT }/> } />
         <Route path="/current-tasks" element={ <CurrentTasks className="bg-mercury-900"/> } />
         <Route path='/profile' element={ <Profile className="bg-mercury-900"/> }/>
+        <Route path='/about' element={ <About className="bg-mercury-900"/> }/>
       </Route>
       <Route path="/signup" element={ <SignUp supabaseClient={ SUPABASECLIENT }/> } />
       <Route path="/login" element={ <Login className="bg-mercury-900" supabaseClient={ SUPABASECLIENT }/> } />
