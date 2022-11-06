@@ -13,12 +13,12 @@ export default function CurrentTasks(){
             {id:"44", name:"Gobierno electronico"}
         ],
         "tasks":[
-            {id:"1", tittle:"Task 01", course:"Informatica y Suciedad", state:"todo"},
-            {id:"2", tittle:"Task 02", course:"Informatica y Suciedad", state:"todo"},
-            {id:"3", tittle:"Task 03", course:"Robotica", state:"inProgress"},
-            {id:"4", tittle:"Task 04", course:"PPS", state:"reviewing"},
-            {id:"5", tittle:"Task 05", course:"Gobierno electronico", state:"reviewing"},
-            {id:"6", tittle:"Task 06", course:"PPS", state:"done"}
+            {id:"1", tittle:"Task 01", course:"Informatica y Suciedad", status:"todo"},
+            {id:"2", tittle:"Task 02", course:"Informatica y Suciedad", status:"todo"},
+            {id:"3", tittle:"Task 03", course:"Robotica", status:"inProgress"},
+            {id:"4", tittle:"Task 04", course:"PPS", status:"reviewing"},
+            {id:"5", tittle:"Task 05", course:"Gobierno electronico", status:"reviewing"},
+            {id:"6", tittle:"Task 06", course:"PPS", status:"done"}
         ],
         "todo": {
             columnId: "todo",
