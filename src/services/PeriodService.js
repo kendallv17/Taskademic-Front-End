@@ -22,10 +22,10 @@ export async function fetchCurrentPeriod(SupabaseClient, clientId){
     if(error) throw new Error(`An error ocurred while fetching the current period data, ${error}.`)
     return data
 }
-export async function deactivatePeriodStatus(SupabaseClient, periodId){
+export async function deactivatePeriod(SupabaseClient, periodId){
     const { error } = await SupabaseClient
     .from('College_Period')
-    .update({ is_active:false })
+    .update({ 'is_active': false })
     .eq('id', periodId)
-    if(error) throw new Error(`An error ocurred while creating the college period, ${error}. Please try again`)
+    if(error) throw new Error(`An error ocurred while updating the previous college period, ${error}. Please try again`)
 }

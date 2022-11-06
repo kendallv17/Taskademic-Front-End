@@ -2,7 +2,7 @@ import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
 import Input from "../../components/input/Input"
 import CoursesTable from "../../components/coursesTable/CoursesTable"
-import { createPeriod, createCourses, fetchCurrentPeriod } from "../../services/PeriodService"
+import { createPeriod, createCourses, fetchCurrentPeriod, deactivatePeriod } from "../../services/PeriodService"
 import { readSession } from "../../utils/SessionManager"
 import { useState, useEffect } from "react"
 import GetWindowSize from "../../utils/GetWindowSize"
@@ -12,9 +12,10 @@ export default function NewPeriod( { SupabaseClient } ){
     const [courses, setCourses] = useState([])
     const [datesValues, setDatesValues] = useState([new Date(), new Date()]);
 
-    const [currentPeriod] = useState(async()=> {
+    const [currentPeriod, setCurrentPeriod] = useState(async()=> {
         try{
             const data = await fetchCurrentPeriod(SupabaseClient, readSession().user.id);
+            setCurrentPeriod(data[0])
             console.log(data[0])
             return data[0];
         }catch(error) {
@@ -43,12 +44,17 @@ export default function NewPeriod( { SupabaseClient } ){
                 end_date: datesValues[1].toISOString().slice(0, 10),
                 owner: readSession().user.id
             };
-            if(currentPeriod == null || window.confirm("You have an active semester, do you want to overwrite it?") === true){
+            if(currentPeriod == null){
                 let newPeriodId = await createPeriod( SupabaseClient,periodDetails);
                 let coursesData = courses.map( ({name, professor}) => ({Course_Name:name , Course_Professor:professor, Period_id:newPeriodId[0].id }) )
                 await createCourses( SupabaseClient, coursesData );
-                alert('Your semester was registered successfully')
+            } else if( window.confirm("You have an active semester, do you want to overwrite it?") === true){
+                await deactivatePeriod( SupabaseClient, currentPeriod.id)
+                let newPeriodId = await createPeriod( SupabaseClient,periodDetails);
+                let coursesData = courses.map( ({name, professor}) => ({Course_Name:name , Course_Professor:professor, Period_id:newPeriodId[0].id }) )
+                await createCourses( SupabaseClient, coursesData );
             }
+            alert('Your semester was registered successfully')
         } catch(error) {
             alert(error)
         }
