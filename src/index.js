@@ -21,7 +21,7 @@ root.render(
       <Route element={<ProtectedRoute/>}>
         <Route path="/" element={ <App className="bg-mercury-600"/>} />
         <Route path="/add-new-period" element={ <NewPeriod className="bg-mercury-900" SupabaseClient={ SUPABASECLIENT }/> } />
-        <Route path="/current-tasks" element={ <CurrentTasks className="bg-mercury-900"/> } />
+        <Route path="/current-tasks" element={ <CurrentTasks className="bg-mercury-900" SupabaseClient={ SUPABASECLIENT }/> } />
         <Route path='/profile' element={ <Profile className="bg-mercury-900"/> }/>
         <Route path='/about' element={ <About className="bg-mercury-900"/> }/>
       </Route>

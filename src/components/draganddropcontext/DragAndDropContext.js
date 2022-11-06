@@ -7,10 +7,11 @@ export default function DragAndDropContext({columData, setData}){
         else {
             const sourceCol = columData[source.droppableId]
             const destinationCol = columData[destination.droppableId]
+            console.log(draggableId)
             let newSourceTasks = Array.from(sourceCol.tasks)
             if (sourceCol === destinationCol){ //Misma columna
                 newSourceTasks.splice(source.index, 1)
-                newSourceTasks.splice(destination.index, 0, draggableId)
+                newSourceTasks.splice(destination.index, 0, Number(draggableId))
                 setData({
                     ...columData,
                     [source.droppableId]: {
@@ -21,7 +22,7 @@ export default function DragAndDropContext({columData, setData}){
             } else {//Diferente columna
                 let newDestinationTasks = Array.from(destinationCol.tasks)
                 newSourceTasks.splice(source.index, 1)
-                newDestinationTasks.splice(destination.index, 0, draggableId)
+                newDestinationTasks.splice(destination.index, 0, Number(draggableId))
                 setData({
                     ...columData,
                     [source.droppableId]: {
@@ -41,10 +42,10 @@ export default function DragAndDropContext({columData, setData}){
     return(
     <DragDropContext onDragEnd={ onDragEnd }>
         <div className="sm:grid md:flex justify-center pt-5">
-                <DroppableColumn data={ columData['todo'].tasks.map( taskId => columData.tasks.find( ({ id }) => id === taskId)) } id={ columData.todo.columnId } tittle="To Do"/>
-                <DroppableColumn data={ columData['inProgress'].tasks.map( taskId => columData.tasks.find( ({ id }) => id === taskId)) } id={ columData.inProgress.columnId  } tittle="In Progress"/>
-                <DroppableColumn data={ columData['reviewing'].tasks.map( taskId => columData.tasks.find( ({ id }) => id === taskId)) } id={ columData.reviewing.columnId  } tittle="Reviewing"/>
-                <DroppableColumn data={ columData['done'].tasks.map( taskId => columData.tasks.find( ({ id }) => id === taskId)) } id={ columData.done.columnId  } tittle="Done"/>
+                <DroppableColumn data={ columData['todo'].tasks.map( taskId => columData.tasks.find( ({ task_id }) => task_id === taskId)) } id={ columData.todo.columnId } tittle="To Do"/>
+                <DroppableColumn data={ columData['inProgress'].tasks.map( taskId => columData.tasks.find( ({ task_id }) => task_id === taskId)) } id={ columData.inProgress.columnId  } tittle="In Progress"/>
+                <DroppableColumn data={ columData['reviewing'].tasks.map( taskId => columData.tasks.find( ({ task_id }) => task_id === taskId)) } id={ columData.reviewing.columnId  } tittle="Reviewing"/>
+                <DroppableColumn data={ columData['done'].tasks.map( taskId => columData.tasks.find( ({ task_id }) => task_id === taskId)) } id={ columData.done.columnId  } tittle="Done"/>
         </div>
     </DragDropContext>)
 }
