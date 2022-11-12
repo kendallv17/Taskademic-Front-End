@@ -6,38 +6,39 @@ import { readSession } from "../../utils/SessionManager"
 import { fetchCurrentPeriod } from "../../services/PeriodService"
 export default function Board({SupabaseClient}){
     const [showModal, setShowModal] = useState(false)
-    
     const [data, setData] = useState();
+    const [loading, setLoading] = useState(true)
+    const taskStateFilter = ( taskList, status) => {
+        return taskList.filter((task) => task.status === status ? task : null).map(({task_id}) => task_id)
+    }
     useEffect(()=> {
         const fetchPeriodData = async () => {
             try{
                 const currentPeriod = await fetchCurrentPeriod(SupabaseClient, readSession().user.id);
+                if(!currentPeriod) return
                 const tasks = await fetchTasks(SupabaseClient, currentPeriod[0].id);
-                console.log(tasks)
                 setData({
                     "period_id":currentPeriod[0].id,
                     "courses":currentPeriod[0].Period_Courses,
                     "tasks":tasks,
                     "todo": {
                         columnId: "todo",
-                        tasks:tasks.filter((task) => task.status === 'todo' ? task : null).map(({task_id})=>task_id)
+                        tasks: taskStateFilter(tasks, 'todo')
                     },
                     "inProgress":{
                         columnId: "inProgress",
-                        tasks:[        
-                        ]
+                        tasks: taskStateFilter(tasks, 'inProgress')
                     },
                     "reviewing":{
                         columnId:"reviewing",
-                        tasks:[
-                        ]
+                        tasks: taskStateFilter(tasks, 'reviewing')
                     },
                     "done":{
                         columnId:"done",
-                        tasks:[
-                        ]
+                        tasks:taskStateFilter(tasks, 'done')
                     }
                 })
+                setLoading(false)
             } catch(error) {
                 alert(error)
                 return null;
@@ -55,13 +56,11 @@ export default function Board({SupabaseClient}){
                 period_id: data.period_id,
                 status:"todo"
             }
-            console.log(newTask)
             const newTaskResponse = await createTask(SupabaseClient, newTask);
-            console.log(newTaskResponse)
-            newData.tasks.push(newTask)
-            newData.todo.tasks.push(`${newData.tasks.length}`)
+            newData.tasks.push(newTaskResponse[0])
+            newData.todo.tasks.push(newTaskResponse[0].task_id)
             setData(newData)
-            console.log(data)
+            console.log(newData)
             alert("New Task added")
             setShowModal(false)
             e.target.reset();
@@ -70,7 +69,7 @@ export default function Board({SupabaseClient}){
         }
     }
     return (
-        (data !== undefined && data.tasks.length) ? 
+        (!loading) ?
             <div>
             <div className="flex flex-col">
                 <div className="flex flex-row-reverse pr-2 pt-3">
@@ -78,7 +77,7 @@ export default function Board({SupabaseClient}){
                         Add new task
                     </button>
                 </div>
-                <DragAndDropContext columData={ data } setData={ setData }/>
+                <DragAndDropContext columData={ data } setData={ setData } />
             </div>
               <Modal show={ showModal } onClose={ () => setShowModal(false)}
               >
