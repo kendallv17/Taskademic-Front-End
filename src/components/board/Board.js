@@ -4,6 +4,9 @@ import { Modal } from "flowbite-react"
 import { createTask, fetchTasks } from "../../services/TaskService"
 import { readSession } from "../../utils/SessionManager"
 import { fetchCurrentPeriod } from "../../services/PeriodService"
+import { Store } from 'react-notifications-component'
+import NotificationBuilder from "../../utils/NotificationBuilder"
+
 export default function Board({SupabaseClient}){
     const [showModal, setShowModal] = useState(false)
     const [data, setData] = useState();
@@ -15,7 +18,7 @@ export default function Board({SupabaseClient}){
         const fetchPeriodData = async () => {
             try{
                 const currentPeriod = await fetchCurrentPeriod(SupabaseClient, readSession().user.id);
-                if(!currentPeriod) return
+                if(currentPeriod[0] === undefined) return
                 const tasks = await fetchTasks(SupabaseClient, currentPeriod[0].id);
                 setData({
                     "period_id":currentPeriod[0].id,
@@ -40,7 +43,7 @@ export default function Board({SupabaseClient}){
                 })
                 setLoading(false)
             } catch(error) {
-                alert(error)
+                Store.addNotification(NotificationBuilder("An error has occurred", error.message, 'danger'));
                 return null;
             }
         };
@@ -59,7 +62,7 @@ export default function Board({SupabaseClient}){
             newData.tasks.push(newTaskResponse[0])
             newData.todo.tasks.push(newTaskResponse[0].task_id)
             setData(newData)
-            alert("New Task added")
+            Store.addNotification(NotificationBuilder("New task added successfuly", "Your task has been created", 'success'));
             setShowModal(false)
             e.target.reset();
         } catch(error) {

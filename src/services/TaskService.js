@@ -15,7 +15,7 @@ export async function updateTaskStatus(SupabaseClient, taskId, newStatus){
     .from('Period_Tasks')
     .update({ status: newStatus })
     .eq('task_id', taskId)
-    if(error) throw new Error(`An error ocurred while fetching the current period data, ${error}.`)
+    if(error) throw new Error(`An error ocurred while updating the task status, ${error}.`)
 }
 
 export async function fetchTasks(SupabaseClient, periodId){
