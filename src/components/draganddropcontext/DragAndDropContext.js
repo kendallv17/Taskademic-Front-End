@@ -1,13 +1,13 @@
 import { DragDropContext } from 'react-beautiful-dnd';
 import DroppableColumn from '../droppableColumn/DroppableColumn';
-export default function DragAndDropContext({columData, setData}){
-    const onDragEnd = result => {
+import { updateTaskStatus } from '../../services/TaskService'
+export default function DragAndDropContext({columData, setData, SupabaseClient}){
+    const onDragEnd = async(result) => {
         const { source, destination, draggableId } = result;
         if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) return
         else {
             const sourceCol = columData[source.droppableId]
             const destinationCol = columData[destination.droppableId]
-            console.log(draggableId)
             let newSourceTasks = Array.from(sourceCol.tasks)
             if (sourceCol === destinationCol){ //Misma columna
                 newSourceTasks.splice(source.index, 1)
@@ -31,11 +31,12 @@ export default function DragAndDropContext({columData, setData}){
                     },
                     [destination.droppableId]: {
                         ...destinationCol,
-                        'tasks':newDestinationTasks
+                        'tasks': newDestinationTasks
 
                     }
                 })
             }
+            await updateTaskStatus(SupabaseClient, draggableId, destination.droppableId)
         }
     } 
 

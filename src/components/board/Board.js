@@ -50,17 +50,15 @@ export default function Board({SupabaseClient}){
         try{
             e.preventDefault()
             let newData = { ...data }
-            let newTask = {
+            const newTaskResponse = await createTask(SupabaseClient, {
                 tittle:e.target.taskname.value,
                 course_id:e.target.courses.value, 
                 period_id: data.period_id,
                 status:"todo"
-            }
-            const newTaskResponse = await createTask(SupabaseClient, newTask);
+            });
             newData.tasks.push(newTaskResponse[0])
             newData.todo.tasks.push(newTaskResponse[0].task_id)
             setData(newData)
-            console.log(newData)
             alert("New Task added")
             setShowModal(false)
             e.target.reset();
@@ -77,7 +75,7 @@ export default function Board({SupabaseClient}){
                         Add new task
                     </button>
                 </div>
-                <DragAndDropContext columData={ data } setData={ setData } />
+                <DragAndDropContext columData={ data } setData={ setData } SupabaseClient={ SupabaseClient }/>
             </div>
               <Modal show={ showModal } onClose={ () => setShowModal(false)}
               >
