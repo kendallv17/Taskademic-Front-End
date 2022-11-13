@@ -34,7 +34,7 @@ export default function Profile(){
                     <></>:
                     <div className="p-6 space-y-2 md:space-y-6 sm:p-8 border-2 px-4">
                             <div className="w-full rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 lg:mx-0 pt-10">
-                                <h1 className="text-3xl font-bold text-center lg:text-left lg:pt-0">{ sessionData.user.user_metadata.first_name } { sessionData.user.user_metadata.lastname }</h1>
+                                <h1 className="text-3xl font-bold text-center lg:text-left lg:pt-0 lg:pl-8">{ sessionData.user.user_metadata.first_name } { sessionData.user.user_metadata.lastname }</h1>
                                 <div className="mx-auto lg:mx-0 w-3/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
                                 <div className="p-4 md:p-6 text-center lg:text-left flex flex-col md:flex-row">
                                      {/* <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center">

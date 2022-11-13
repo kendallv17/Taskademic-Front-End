@@ -5,6 +5,8 @@ import CoursesTable from "../../components/coursesTable/CoursesTable"
 import { createPeriod, createCourses, fetchCurrentPeriod, deactivatePeriod } from "../../services/PeriodService"
 import { readSession } from "../../utils/SessionManager"
 import { useState, useEffect } from "react"
+import { Store } from "react-notifications-component"
+import NotificationBuilder from "../../utils/NotificationBuilder"
 import GetWindowSize from "../../utils/GetWindowSize"
 export default function NewPeriod( { SupabaseClient } ){
     const [hidden, setHidden] = useState(true)
@@ -18,7 +20,7 @@ export default function NewPeriod( { SupabaseClient } ){
             setCurrentPeriod(data[0])
             return data[0];
         }catch(error) {
-            alert(error)
+            Store.addNotification(NotificationBuilder("An error has occurred", error.message, 'danger'));
             return null;
         }
     })

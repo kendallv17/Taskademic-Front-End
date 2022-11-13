@@ -5,7 +5,7 @@ export default function SelectedLicense({ licenseName }){
         <div className="mt-2 space-y-0">
         <div className="max-w-sm mx-auto border rounded-lg md:mx-4 dark:border-gray-700">
             <div className="p-0">
-                <h1 className="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white text-center">Current License: { userLicense.name }</h1>
+                <h1 className="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white text-center">{ userLicense.name } license</h1>
             </div>
             <hr className="border-gray-200 dark:border-gray-700"/>
             <div className="p-6">
