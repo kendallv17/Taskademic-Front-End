@@ -44,18 +44,22 @@ export default function DragAndDropContext({columData, setData, SupabaseClient})
     }
     const deleteTaskHandler = async(id, colId) => {
         try{
-            let newTaskArray = Array.from(columData.tasks)
-            let newColumnTasks = Array.from(columData[colId].tasks);
-            await deleteTask(SupabaseClient, id)
-            setData({
-                ...columData,
-                tasks: newTaskArray.filter(({task_id}) => task_id !== id),
-                [colId]: {
-                    columnId:colId,
-                    tasks: newColumnTasks.filter(task_id => task_id !== id)
-                }
-            })
-            Store.addNotification(NotificationBuilder("Task deleted", "Your task has been deleted", 'default'));
+            if(window.confirm("Please confirm task deletion") === true){
+                let newTaskArray = Array.from(columData.tasks)
+                let newColumnTasks = Array.from(columData[colId].tasks);
+                await deleteTask(SupabaseClient, id)
+                setData({
+                    ...columData,
+                    tasks: newTaskArray.filter(({task_id}) => task_id !== id),
+                    [colId]: {
+                        columnId:colId,
+                        tasks: newColumnTasks.filter(task_id => task_id !== id)
+                    }
+                })
+                Store.addNotification(NotificationBuilder("Task deleted", "Your task has been deleted", 'default'));
+            } else {
+                Store.addNotification(NotificationBuilder("Task not deleted", "Canceled by user", 'info'));
+            }
         } catch(error) {
             Store.addNotification(NotificationBuilder("An error has occurred", error.message, 'danger'));
         }

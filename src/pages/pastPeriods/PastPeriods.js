@@ -70,7 +70,7 @@ export default function PastPeriods({ SupabaseClient }){
                                                 { period.period_description }
                                             </th>
                                             <td className="py-4 px-6">
-                                                { period.is_active ? "Active" : "Archive" }
+                                                { period.is_active ? "Active" : "Archived" }
                                             </td>
                                             <td className="py-4 px-6">
                                                 { period.start_date }

@@ -7,13 +7,14 @@ import { readSession } from "../../utils/SessionManager"
 import { useState, useEffect } from "react"
 import { Store } from "react-notifications-component"
 import NotificationBuilder from "../../utils/NotificationBuilder"
+import { useNavigate } from "react-router-dom";
 import GetWindowSize from "../../utils/GetWindowSize"
 export default function NewPeriod( { SupabaseClient } ){
     const [hidden, setHidden] = useState(true)
     const [windowSize, setWindowSize] = useState(GetWindowSize());
     const [courses, setCourses] = useState([])
     const [datesValues, setDatesValues] = useState([new Date(), new Date()]);
-
+    const navigate = useNavigate();
     const [currentPeriod, setCurrentPeriod] = useState(async()=> {
         try{
             const data = await fetchCurrentPeriod(SupabaseClient, readSession().user.id);
@@ -55,7 +56,8 @@ export default function NewPeriod( { SupabaseClient } ){
                 let coursesData = courses.map( ({name, professor}) => ({Course_Name:name , Course_Professor:professor, Period_id:newPeriodId[0].id }) )
                 await createCourses( SupabaseClient, coursesData );
             }
-            alert('Your semester was registered successfully')
+            Store.addNotification(NotificationBuilder("Period created successfully", "Your semester was registered successfully", 'success'));
+            navigate("/current-tasks", { replace: true })
         } catch(error) {
             alert(error)
         }
