@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 export default function SidebarItem({href, text, icon}){
     const uriLocation = window.location.pathname;
-    console.log(uriLocation)
     return (
         <li className="border-b border-mercury-600">
             <Link to={href} className={`flex items-center py-2 text-base text-center font-normal rounded-lg hover:bg-bright-turquoise-700 ${ uriLocation === href ? 'bg-bright-turquoise-700' : null}`}>

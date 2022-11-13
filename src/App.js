@@ -28,7 +28,7 @@ function App() {
         <Navbar hidden={ hidden } setHidden={ setHidden }></Navbar>
         { windowSize.innerWidth < 768 && !hidden ? <></> :
         <div>
-          <h1 className="text-center text-3xl font-bold pt-8 lg:pt-2">Welcome { sessionData.user.user_metadata.first_name } { sessionData.user.user_metadata.lastname }, we are glad to see you!</h1>
+          <h1 className="text-center text-3xl font-bold pt-8 lg:pt-10">Welcome { sessionData.user.user_metadata.first_name }, we are glad to see you!</h1>
           <div className="grid grid-flow-row gap-6 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-5">
             <div className="my-8 rounded-2xl shadow-lg shadow-gray-200 dark:shadow-gray-900 bg-white dark:bg-gray-800 duration-300 hover:-translate-y-3">
               <a href="/current-tasks" className="cursor-pointer">
