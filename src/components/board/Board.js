@@ -5,12 +5,14 @@ import { createTask, fetchTasks } from "../../services/TaskService"
 import { readSession } from "../../utils/SessionManager"
 import { fetchCurrentPeriod } from "../../services/PeriodService"
 import { Store } from 'react-notifications-component'
+import { useNavigate } from "react-router-dom";
 import NotificationBuilder from "../../utils/NotificationBuilder"
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 export default function Board({SupabaseClient}){
     const [showModal, setShowModal] = useState(false)
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true)
+    const navigate = useNavigate();
     const taskStateFilter = ( taskList, status) => {
         return taskList.filter((task) => task.status === status ? task : null).map(({task_id}) => task_id)
     }
@@ -18,30 +20,34 @@ export default function Board({SupabaseClient}){
         const fetchPeriodData = async () => {
             try{
                 const currentPeriod = await fetchCurrentPeriod(SupabaseClient, readSession().user.id);
-                if(currentPeriod[0] === undefined) return
-                const tasks = await fetchTasks(SupabaseClient, currentPeriod[0].id);
-                setData({
-                    "period_id":currentPeriod[0].id,
-                    "courses":currentPeriod[0].Period_Courses,
-                    "tasks":tasks,
-                    "todo": {
-                        columnId: "todo",
-                        tasks: taskStateFilter(tasks, 'todo')
-                    },
-                    "inProgress":{
-                        columnId: "inProgress",
-                        tasks: taskStateFilter(tasks, 'inProgress')
-                    },
-                    "reviewing":{
-                        columnId:"reviewing",
-                        tasks: taskStateFilter(tasks, 'reviewing')
-                    },
-                    "done":{
-                        columnId:"done",
-                        tasks:taskStateFilter(tasks, 'done')
-                    }
-                })
-                setLoading(false)
+                if(currentPeriod[0] === undefined){
+                    Store.addNotification(NotificationBuilder("You do not have any active educational periods", "Please create one before adding some tasks", 'info'));
+                    navigate("/add-new-period", { replace: true })
+                }else{
+                    const tasks = await fetchTasks(SupabaseClient, currentPeriod[0].id);
+                    setData({
+                        "period_id":currentPeriod[0].id,
+                        "courses":currentPeriod[0].Period_Courses,
+                        "tasks":tasks,
+                        "todo": {
+                            columnId: "todo",
+                            tasks: taskStateFilter(tasks, 'todo')
+                        },
+                        "inProgress":{
+                            columnId: "inProgress",
+                            tasks: taskStateFilter(tasks, 'inProgress')
+                        },
+                        "reviewing":{
+                            columnId:"reviewing",
+                            tasks: taskStateFilter(tasks, 'reviewing')
+                        },
+                        "done":{
+                            columnId:"done",
+                            tasks:taskStateFilter(tasks, 'done')
+                        }
+                    })
+                    setLoading(false)
+                }
             } catch(error) {
                 Store.addNotification(NotificationBuilder("An error has occurred", error.message, 'danger'));
                 return null;

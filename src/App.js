@@ -46,7 +46,7 @@ function App() {
                 <figure>
                   <img src={ NewPeriod } alt="Go to my tasks"/>
                   <figcaption className="p-4">
-                    <p className="text-lg mb-4 font-bold leading-relaxed text-gray-800 dark:text-gray-300" x-text="post.title">Are you starting a new educational period?</p>
+                    <p className="text-lg mb-4 font-bold leading-relaxed text-gray-800 dark:text-gray-300" x-text="post.title">Are you starting a new journey?</p>
                     <small className="text-base leading-5 text-gray-500 dark:text-gray-400" x-text="post.description">Click here to configure your classes and professors</small>
                   </figcaption>
                 </figure>
