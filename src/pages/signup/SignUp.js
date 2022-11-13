@@ -1,14 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import success from "../../images/success.jpg"
 import Input from "../../components/input/Input";
 import { writeSession } from '../../utils/SessionManager';
 import { useNavigate } from "react-router-dom";
+import { Store } from "react-notifications-component";
+import NotificationBuilder from "../../utils/NotificationBuilder";
+import License from "../../components/licence/License";
 export default function SignUp({supabaseClient}){
     const navigate = useNavigate();
+    const [selectedLicense, setSelectedLicense] = useState(null)
     const handleSignUpSubmit = async (event) => {
         try {
             event.preventDefault()
             let iqualPasswords = event.target.password.value === event.target.repeat_password.value;
+            if(selectedLicense === null) throw new Error("No license was selected")
             if(iqualPasswords){
                 const { data, error } = await supabaseClient.auth.signUp(
                     {
@@ -18,7 +23,8 @@ export default function SignUp({supabaseClient}){
                         data: {
                           first_name: event.target.name.value,
                           lastname: event.target.lastname.value,
-                          college: event.target.college.value
+                          college: event.target.institution.value,
+                          license: selectedLicense.name
                         }
                       }
                     }
@@ -32,7 +38,7 @@ export default function SignUp({supabaseClient}){
             
         }
         catch(error){
-            alert(error)
+            Store.addNotification(NotificationBuilder(error.message,'','danger'))
         }
     }
     return (
@@ -61,7 +67,7 @@ export default function SignUp({supabaseClient}){
                         <Input type="password" identifier="repeat_password" tittle="Repeat the password" placeholder="" required={true}/>
                     </div>
                     <div className="mb-3">
-                        <Input type="text" identifier="college" tittle="Your college name" placeholder="" required={true}/>
+                        <Input type="text" identifier="institution" tittle="Your institution name" placeholder="" required={true}/>
                     </div>
                     <div className="flex items-center content-center mb-3">
                         <div className="flex items-center h-5">
@@ -69,6 +75,7 @@ export default function SignUp({supabaseClient}){
                         </div>
                         <label htmlFor="terms" className="ml-2 text-sm font-medium text-mercury-600 dark:text-gray-300">I agree with the <a href="/terms-and-conditions" className="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a></label>
                     </div>
+                    <License selectedLicense={ selectedLicense } setSelectedLicense = { setSelectedLicense }/>
                     <div className="flex">
                         <a type="button" href="/login" className="flex-1 mr-2 text-mercury-600 bg-radical-red-800 hover:bg-radical-red-600 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cancel</a>
                         <button type="submit" className="flex-1 text-mercury-600 bg-bright-turquoise-700 hover:bg-bright-turquoise-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign up</button>

@@ -4,7 +4,6 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { readSession, clearSession } from "../../utils/SessionManager";
 import { useNavigate } from "react-router-dom";
-import profile from "../../images/profile.png"
 import SelectedLicense from "../../components/licence/SelectedLicense";
 export default function Profile(){
     const navigate = useNavigate();
@@ -53,7 +52,7 @@ export default function Profile(){
                                     <p className="pt-8 text-sm">
                                         Currently enroll at <strong>{ sessionData.user.user_metadata.college }</strong>
                                     </p>
-                                    <SelectedLicense/>
+                                    <SelectedLicense licenseName={ sessionData.user.user_metadata.license }/>
                                     <div className="pt-12 pb-8">
                                         <button className="bg-radical-red-700 hover:bg-radical-red-400 text-white font-bold py-2 px-4 rounded-full" onClick={ handleSignOut }>
                                             Sign Out
