@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Landing from './pages/landing/Landing';
 import Profile from './pages/profile/Profile';
+import PastPeriods from './pages/pastPeriods/PastPeriods';
 import { createClient } from "@supabase/supabase-js";
 import { Globals } from './Globals';
 import { ReactNotifications } from 'react-notifications-component';
@@ -23,6 +24,7 @@ root.render(
     <Routes>
       <Route element={<ProtectedRoute/>}>
         <Route path="/" element={ <App className="bg-mercury-600"/>} />
+        <Route path="/past-periods" element={ <PastPeriods/> } />
         <Route path="/add-new-period" element={ <NewPeriod className="bg-mercury-900" SupabaseClient={ SUPABASECLIENT }/> } />
         <Route path="/current-tasks" element={ <CurrentTasks className="bg-mercury-900" SupabaseClient={ SUPABASECLIENT }/> } />
         <Route path='/profile' element={ <Profile className="bg-mercury-900"/> }/>

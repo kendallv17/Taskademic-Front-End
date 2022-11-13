@@ -37,9 +37,9 @@ export default function DragAndDropContext({columData, setData, SupabaseClient})
 
                     }
                 })
+                await updateTaskStatus(SupabaseClient, draggableId, destination.droppableId)
+                Store.addNotification(NotificationBuilder("Task status updated", '', 'warning'));
             }
-            await updateTaskStatus(SupabaseClient, draggableId, destination.droppableId)
-            Store.addNotification(NotificationBuilder("Task status updated", '', 'warning'));
         }
     }
     const deleteTaskHandler = async(id, colId) => {

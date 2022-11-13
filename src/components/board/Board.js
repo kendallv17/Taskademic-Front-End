@@ -6,7 +6,7 @@ import { readSession } from "../../utils/SessionManager"
 import { fetchCurrentPeriod } from "../../services/PeriodService"
 import { Store } from 'react-notifications-component'
 import NotificationBuilder from "../../utils/NotificationBuilder"
-
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 export default function Board({SupabaseClient}){
     const [showModal, setShowModal] = useState(false)
     const [data, setData] = useState();
@@ -71,7 +71,7 @@ export default function Board({SupabaseClient}){
     }
     return (
         (!loading) ?
-            <div>
+        <div>
             <div className="flex flex-col">
                 <div className="flex flex-row-reverse pr-2 pt-3">
                     <button className="focus:outline-none text-white bg-bright-turquoise-600 hover:bg-bright-turquoise-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={ () => setShowModal(true) }>
@@ -79,7 +79,7 @@ export default function Board({SupabaseClient}){
                     </button>
                 </div>
                 <DragAndDropContext columData={ data } setData={ setData } SupabaseClient={ SupabaseClient }/>
-                <Modal show={ showModal } onClose={ () => setShowModal(false)}>
+                <Modal show={ showModal } onClose={ () => setShowModal(false) } size="5xl">
                     <Modal.Header>
                         Please fill in the required information
                     </Modal.Header>
@@ -92,7 +92,7 @@ export default function Board({SupabaseClient}){
                                 </select>
                             </div>
                             <div className="mb-6">
-                                <label htmlFor="taskname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Base input</label>
+                                <label htmlFor="taskname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Task Name</label>
                                 <input type="text" id="taskname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required={ true }/>
                             </div>
                             </Modal.Body>
@@ -107,6 +107,6 @@ export default function Board({SupabaseClient}){
                     </form>
                 </Modal>
             </div>
-        </div>:null
+        </div>: <div className="pt-10"><LoadingSpinner/></div>
     )
 }
