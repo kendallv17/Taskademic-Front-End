@@ -19,7 +19,7 @@ const SUPABASECLIENT = createClient(Globals.REACT_APP_SUPABASE_URL, Globals.REAC
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <ReactNotifications />
+    <ReactNotifications isMobile={true}/>
     <Routes>
       <Route element={<ProtectedRoute/>}>
         <Route path="/" element={ <App className="bg-mercury-600"/>} />

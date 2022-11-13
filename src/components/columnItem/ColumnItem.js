@@ -1,16 +1,20 @@
 import { Draggable } from "react-beautiful-dnd"
-export default function ColumnItem({id, index, tittle, course}){
+export default function ColumnItem({id, index, tittle, course, colId, deleteTaskHandler }){
     return (
     <Draggable draggableId={`${id}`} index={index} key={id}>
         {
             (provided, snapshot) => 
-                <div className={`p-6 mx-2 bg-mercury-500 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 my-2 ${snapshot.isDragging ? 'bg-radical-red-700 text-mercury-500': null}`}
+                <div className={`w-full p-6 px-2 bg-mercury-500 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 my-2 relative ${snapshot.isDragging ? 'bg-radical-red-700 text-mercury-500': null}`}
                      { ...provided.draggableProps }
                      { ...provided.dragHandleProps } 
                      ref={ provided.innerRef }
                     >
-                        <h6 className="mb-2 sm:text-[14px] md:text-[18px] font-bold tracking-tight text- dark:text-white">{tittle}</h6>
-                        <p className="font-normal sm:text-[12px] md:text-[18-px]">{course}</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="absolute w-7 h-7 top-0 right-0" onClick={() => deleteTaskHandler(id, colId)}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                        </svg>
+
+                        <h6 className="pt-2 mb-2 sm:text-[14px] md:text-[18px] font-bold tracking-tight text- dark:text-white">{tittle}</h6>
+                        <p className="font-normal sm:text-[12px] md:text-[18-px]">{ course }</p>
                 </div>
         }
     </Draggable>

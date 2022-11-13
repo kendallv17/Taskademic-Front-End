@@ -7,8 +7,12 @@ export async function createTask(SupabaseClient, taskData){
     return data
   
 }
-export async function deleteTask(){
-    
+export async function deleteTask(SupabaseClient, task_id){
+    const { error } = await SupabaseClient
+    .from('Period_Tasks')
+    .delete()
+    .eq('task_id', task_id)
+    if(error) throw new Error(`An error ocurred while deleting your task, ${error}.`)
 }
 export async function updateTaskStatus(SupabaseClient, taskId, newStatus){
     const { error } = await SupabaseClient
