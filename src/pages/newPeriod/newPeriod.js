@@ -16,7 +16,6 @@ export default function NewPeriod( { SupabaseClient } ){
         try{
             const data = await fetchCurrentPeriod(SupabaseClient, readSession().user.id);
             setCurrentPeriod(data[0])
-            console.log(data[0])
             return data[0];
         }catch(error) {
             alert(error)
