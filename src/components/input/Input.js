@@ -1,5 +1,5 @@
 import React from "react";
-import BasicDateRangePicker from "../../components/daterangepicker/DateRangePicker"
+import BasicDateRangePicker from "../daterangepicker/DateRangePicker"
 export default function Input({type, identifier, tittle, placeholder, required, value, onChange}){
     return (
         <>
