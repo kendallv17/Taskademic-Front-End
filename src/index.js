@@ -16,6 +16,7 @@ import { Globals } from './Globals';
 import { ReactNotifications } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
 import About from './pages/about/About';
+import Terms from './pages/terms/Terms';
 const SUPABASECLIENT = createClient(Globals.REACT_APP_SUPABASE_URL, Globals.REACT_APP_SUPABASE_KEY)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -33,6 +34,7 @@ root.render(
       <Route path="/signup" element={ <SignUp supabaseClient={ SUPABASECLIENT }/> } />
       <Route path="/login" element={ <Login className="bg-mercury-900" supabaseClient={ SUPABASECLIENT }/> } />
       <Route path="/landing" element={ <Landing/>}/>
+      <Route path="/terms-and-conditions" element={ <Terms/> }/>
     </Routes>
   </BrowserRouter>
 );
